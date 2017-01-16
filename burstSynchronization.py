@@ -53,14 +53,14 @@ ax.set_yticks([])
 ax.text(0.5, 1.0, "BURST", transform=ax.transAxes, ha="right", va="bottom", color="w", family="sans-serif", fontweight="bold", fontsize=16)
 ax.text(0.5, 1.0, "SYNCHRONIZATION", transform=ax.transAxes, ha="left", va="bottom", color="w", family="sans-serif", fontweight="light", fontsize=16)
 
-exite = [(-1,0), (1,0), (0,-1), (0,1)]
+excite = [(-1,0), (1,0), (0,-1), (0,1)]
 inhibit = [(-2,0), (2,0), (0,-2), (0,2)] #[(-1,-1), (-1,1), (1,-1), (1,1)]
 def getNeighborhoodSum(data, f):
-    global exite
+    global excite
     global inhibit
     newdata = np.zeros(shape=data.shape)
     for (x,y), value in np.ndenumerate(data):
-        newdata[x,y] =  data.take(exite, mode='wrap').sum()/f - data.take(inhibit, mode='wrap').sum()/(2*f)
+        newdata[x,y] =  data.take(excite, mode='wrap').sum()/f - data.take(inhibit, mode='wrap').sum()/(2*f)
     return newdata
 
 def doTimestep(data):
